@@ -92,7 +92,7 @@ where
                             Ok(_) => {}
                             Err(e) => error!("error executing action: {}", e),
                         },
-                        Err(e) => error!("error receiving action: {}", e),
+                        Err(e) => panic!("error receiving action: {}", e),
                     }
                 }
             });
@@ -116,7 +116,7 @@ where
                                 }
                             }
                         }
-                        Err(e) => error!("error receiving event: {}", e),
+                        Err(e) => panic!("error receiving event: {}", e),
                     }
                 }
             });
@@ -131,7 +131,7 @@ where
                 while let Some(event) = event_stream.next().await {
                     match event_sender.send(event) {
                         Ok(_) => {}
-                        Err(e) => error!("error sending event: {}", e),
+                        Err(e) => panic!("error sending event: {}", e),
                     }
                 }
             });
